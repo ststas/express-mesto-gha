@@ -12,4 +12,4 @@ function handleError(res, err) {
 //   return res.status(404).send({ message: 'Page not found' });
 // }
 
-module.exports = { handleError, handleRouteError };
+module.exports = { handleError };
