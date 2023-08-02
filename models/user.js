@@ -3,24 +3,26 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    minlength: 2,
-    maxlength: 40,
     required: true,
-    default: 'D. Hockney',
+    minlength: 2,
+    maxlength: 30,
   },
   about: {
     type: String,
-    minlength: 0,
-    maxlength: 200,
     required: true,
-    default: 'Painter',
+    minlength: 2,
+    maxlength: 30,
   },
   avatar: {
     type: String,
-    default: 'https://www.hockney.com/img/gallery/digital/ipad/1201.jpg',
     required: true,
+    validate: {
+      validator(value) {
+        return /http?s:\/\/(www.)?[-_~:/?#@!$&'[\]()*+,;.=a-z0-9]+/i.test(value);
+      },
+      message: 'Invalid link',
+    },
   },
-
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('user', userSchema);
