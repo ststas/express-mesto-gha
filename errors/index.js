@@ -8,4 +8,8 @@ function handleError(res, err) {
   return res.status(500).send({ message: 'На сервере произошла ошибка' });
 }
 
-module.exports = { handleError };
+function handleRouteError(req, res) {
+  return res.status(404).send({ message: 'Page not found' });
+}
+
+module.exports = { handleError, handleRouteError };

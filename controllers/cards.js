@@ -2,7 +2,6 @@ const Card = require('../models/card');
 const { handleError } = require('../errors');
 
 module.exports.getCards = (req, res) => Card.find()
-  // .orFail()
   .populate(['owner', 'likes'])
   .then((cards) => res.status(200).send(cards))
   .catch((err) => handleError(res, err));
