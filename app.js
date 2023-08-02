@@ -6,7 +6,7 @@ const cardsRouter = require('./routes/cards');
 
 const { PORT, URI } = process.env;
 
-mongoose.connect(URI, { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true });
 
 const app = express();
 
