@@ -14,7 +14,7 @@ module.exports.getUserById = (req, res) => {
       .orFail()
       .then((user) => res.status(200).send(user))
       .catch((err) => handleError(res, err));
-  } return handleError(res, { name: 'DocumentNotFoundError', message: 'Invalid User ID' });
+  } return handleError(res, { name: 'CastError', message: 'Invalid User ID' });
 };
 
 module.exports.createUser = (req, res) => {
