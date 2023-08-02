@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 require('dotenv').config();
-// const { handleRouteError } = require('./errors');
+const { handleRouteError } = require('./errors');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 
@@ -18,8 +18,9 @@ app.use((req, res, next) => {
   };
   next();
 });
-// app.all('*', handleRouteError);
+
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
+app.all('*', handleRouteError);
 
 app.listen(PORT);
