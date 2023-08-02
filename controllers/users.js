@@ -3,7 +3,6 @@ const User = require('../models/user');
 const { handleError } = require('../errors');
 
 module.exports.getUsers = (req, res) => User.find()
-  .orFail()
   .then((users) => res.status(200).send(users))
   .catch((err) => handleError(res, err));
 
