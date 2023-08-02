@@ -5,7 +5,7 @@ const { handleRouteError } = require('./errors');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 
-const { PORT, URI} = process.env;
+const { PORT = 3000, URI = 'mongodb://localhost:27017/mestodb' } = process.env;
 
 mongoose.connect(URI, { useNewUrlParser: true });
 
