@@ -2,7 +2,7 @@ const Card = require('../models/card');
 const { handleError } = require('../errors');
 
 module.exports.getCards = (req, res) => Card.find()
-  .orFail()
+  // .orFail()
   .populate(['owner', 'likes'])
   .then((cards) => res.status(200).send(cards))
   .catch((err) => handleError(res, err));
@@ -23,7 +23,7 @@ module.exports.deleteCard = (req, res) => {
   const { cardId } = req.params;
   return Card.findByIdAndRemove(cardId)
     .orFail()
-    .then((deletedCard) => res.send(deletedCard))
+    .then((deletedCard) => res.status(200).send(deletedCard))
     .catch((err) => handleError(res, err));
 };
 
