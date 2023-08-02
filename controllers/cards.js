@@ -23,7 +23,7 @@ module.exports.deleteCard = (req, res) => {
   const { cardId } = req.params;
   return Card.findByIdAndRemove(cardId)
     .orFail()
-    .then((deletedCard) => res.status(200).send(deletedCard))
+    .then(() => res.status(200).send({ message: 'Card is deleted' }))
     .catch((err) => handleError(res, err));
 };
 
