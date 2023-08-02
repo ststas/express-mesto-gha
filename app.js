@@ -4,9 +4,9 @@ require('dotenv').config();
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 
-const { PORT, ENDPOINT } = process.env;
+const { PORT, URI } = process.env;
 
-mongoose.connect(ENDPOINT, { useNewUrlParser: true });
+mongoose.connect(URI, { useNewUrlParser: true });
 
 const app = express();
 
