@@ -1,6 +1,7 @@
 const { ObjectId } = require('mongoose').Types;
+
 const User = require('../models/user');
-const { handleError } = require('../errors');
+const { handleError, handleUserNotFoundError } = require('../errors');
 
 module.exports.getUsers = (req, res) => User.find()
   .then((users) => res.status(200).send(users))
@@ -13,7 +14,7 @@ module.exports.getUserById = (req, res) => {
       .orFail()
       .then((user) => res.status(200).send(user))
       .catch((err) => handleError(res, err));
-  } return handleError(res, { name: 'CastError', message: 'Invalid User ID' });
+  } return handleError(res, handleUserNotFoundError(res, userId));
 };
 
 module.exports.createUser = (req, res) => {

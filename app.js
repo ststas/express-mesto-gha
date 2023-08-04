@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 require('dotenv').config();
 const { handleRouteError } = require('./errors');
-const usersRouter = require('./routes/users');
-const cardsRouter = require('./routes/cards');
+const Router = require('./routes');
 
 const { PORT = 3000, URI = 'mongodb://localhost:27017/mestodb' } = process.env;
 
@@ -19,8 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/users', usersRouter);
-app.use('/cards', cardsRouter);
+app.use('/', Router);
 app.all('*', handleRouteError);
 
 app.listen(PORT);
