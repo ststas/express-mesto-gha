@@ -11,6 +11,7 @@ mongoose.connect(URI, { useNewUrlParser: true });
 const app = express();
 
 app.use(express.json());
+
 app.use((req, res, next) => {
   req.user = {
     _id: '64ca4ad673983ca0897e2b45',
