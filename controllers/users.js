@@ -1,5 +1,3 @@
-const { ObjectId } = require('mongoose').Types;
-
 const User = require('../models/user');
 const { handleError, handleUserNotFoundError } = require('../errors');
 
@@ -9,7 +7,7 @@ module.exports.getUsers = (req, res) => User.find()
 
 module.exports.getUserById = (req, res) => {
   const { userId } = req.params;
-  if (ObjectId.isValid(userId)) {
+  if (userId.length === 24) {
     return User.findById(userId)
       .orFail()
       .then((user) => res.status(200).send(user))
