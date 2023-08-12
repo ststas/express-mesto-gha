@@ -2,9 +2,9 @@ const http2 = require('http2');
 const { default: mongoose } = require('mongoose');
 
 const { constants } = http2;
-console.log(constants)
 
 function handleError(res, err) {
+  console.log('TESTTETSTETST')
   if (err instanceof mongoose.Error.ValidationError || err instanceof mongoose.Error.CastError) {
     return res.status(constants.HTTP_STATUS_BAD_REQUEST).send({ message: err.message });
   }
