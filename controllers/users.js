@@ -18,7 +18,9 @@ module.exports.createUser = (req, res) => {
     .then((hash) => User.create({
       email, password: hash, name, about, avatar,
     })
-      .then((user) => res.status(201).send(user)))
+      .then((user) => res.status(201).send({
+        email: user.email, name: user.name, about: user.about, avatar: user.avatar, _id: user._id
+      })))
     .catch((err) => {
       if (err.code === 11000) {
         return handleEmailIsRegisteredError(res);
