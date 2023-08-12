@@ -10,15 +10,29 @@ function handleError(res, err) {
   if (err instanceof mongoose.Error.DocumentNotFoundError) {
     return res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: err.message });
   }
-  return res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' });
+  return res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR).send({ message: 'Internal Server Error' });
 }
 
-function handleUserNotFoundError(res, userId) {
-  return res.status(constants.HTTP_STATUS_BAD_REQUEST).send({ message: `Invalid User ID: ${userId}. User ID must contain 24 symbols` });
+function handleWrongCredentials(res, customMessage) {
+  return res.status(constants.HTTP_STATUS_BAD_REQUEST).send({ message: customMessage });
 }
 
-function handleRouteError(req, res) {
+function handleRouteError(res) {
   return res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: 'Page not found' });
 }
 
-module.exports = { handleError, handleRouteError, handleUserNotFoundError };
+function handleAccessDenied(res) {
+  return res.status(constants.HTTP_STATUS_FORBIDDEN).send({ message: 'Access Denied' });
+}
+
+function handleEmailIsRegisteredError(res) {
+  return res.status(constants.HTTP_STATUS_CONFLICT).send({ message: 'Email is Already Registered' });
+}
+
+module.exports = {
+  handleError,
+  handleRouteError,
+  handleWrongCredentials,
+  handleAccessDenied,
+  handleEmailIsRegisteredError,
+};

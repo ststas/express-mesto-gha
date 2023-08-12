@@ -1,6 +1,8 @@
 const Card = require('../models/card');
 const { handleError } = require('../errors');
 
+const { handleAccessDenied } = require('../errors');
+
 module.exports.getCards = (req, res) => Card.find()
   .populate(['owner', 'likes'])
   .then((cards) => res.status(200).send(cards))
@@ -20,9 +22,15 @@ module.exports.createCard = (req, res) => {
 
 module.exports.deleteCard = (req, res) => {
   const { cardId } = req.params;
-  return Card.findByIdAndRemove(cardId)
+  return Card.findById(cardId)
     .orFail()
-    .then((deletedCard) => res.status(200).send(deletedCard))
+    .then((deletedCard) => {
+      if (req.user._id !== String(deletedCard.owner._id)) {
+        return handleAccessDenied(res);
+      }
+      return deletedCard.deleteOne()
+        .then(() => res.status(200).send(deletedCard));
+    })
     .catch((err) => handleError(res, err));
 };
 
