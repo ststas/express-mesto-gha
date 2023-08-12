@@ -2,6 +2,7 @@ const http2 = require('http2');
 const { default: mongoose } = require('mongoose');
 
 const { constants } = http2;
+console.log(constants)
 
 function handleError(res, err) {
   if (err instanceof mongoose.Error.ValidationError || err instanceof mongoose.Error.CastError) {
@@ -14,7 +15,7 @@ function handleError(res, err) {
 }
 
 function handleWrongCredentials(res, customMessage) {
-  return res.status(constants.HTTP_STATUS_BAD_REQUEST).send({ message: customMessage });
+  return res.status(constants.HTTP_STATUS_UNAUTHORIZED).send({ message: customMessage });
 }
 
 function handleRouteError(res) {
