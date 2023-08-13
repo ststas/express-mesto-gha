@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { handleRouteError } = require('../errors');
-const { validateSignUp, validateSignIn } = require('../middlewares/validation')
+const { validateSignUp, validateSignIn } = require('../middlewares/validation');
 const auth = require('../middlewares/auth');
 const { login, createUser } = require('../controllers/users');
 const usersRouter = require('./users');
