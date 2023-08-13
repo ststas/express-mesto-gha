@@ -18,9 +18,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cookies());
 app.use(requestRateLimiter);
-app.all('*', handleRouteError);
 app.use('/', Router);
-
 app.use(errors());
-
+app.all('*', handleRouteError);
 app.listen(PORT);
