@@ -22,5 +22,4 @@ app.all('*', handleRouteError);
 app.use(requestRateLimiter);
 app.use(errors());
 
-
 app.listen(PORT);
