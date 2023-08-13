@@ -18,9 +18,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(cookies());
 app.use(requestRateLimiter);
-
-app.use('/', Router);
 app.all('*', handleRouteError);
+app.use('/', Router);
 
 app.use(errors());
 
