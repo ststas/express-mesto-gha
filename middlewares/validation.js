@@ -45,8 +45,8 @@ module.exports.validateUserAvatar = () => celebrate({
 
 module.exports.validateCardCreation = () => celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    link: Joi.string().pattern(RegExUrl),
+    name: Joi.string().required().min(2).max(30),
+    link: Joi.string().required().pattern(RegExUrl),
   }),
   // headers: Joi.object().keys({
   //   authorization: Joi.string().required().pattern(RegExToken),
