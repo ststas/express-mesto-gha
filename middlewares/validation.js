@@ -1,5 +1,5 @@
 const { Joi, celebrate } = require('celebrate');
-const { RegExUrl, RegExToken } = require('../constants/constants');
+const { RegExUrl } = require('../constants/constants');
 
 module.exports.validateSignUp = () => celebrate({
   body: Joi.object().keys({
@@ -24,12 +24,6 @@ module.exports.validateGetUserById = () => celebrate({
   }),
 });
 
-module.exports.validateGetUserInfo = () => celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required().pattern(RegExToken),
-  }).unknown(true),
-});
-
 module.exports.validateUserInfo = () => celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
@@ -48,34 +42,22 @@ module.exports.validateCardCreation = () => celebrate({
     name: Joi.string().required().min(2).max(30),
     link: Joi.string().required().pattern(RegExUrl),
   }),
-  // headers: Joi.object().keys({
-  //   authorization: Joi.string().required().pattern(RegExToken),
-  // }).unknown(true),
 });
 
 module.exports.validateCardRemoval = () => celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().required().hex().length(24),
   }),
-  // headers: Joi.object().keys({
-  //   authorization: Joi.string().required().pattern(RegExToken),
-  // }).unknown(true),
 });
 
 module.exports.validateCardLike = () => celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().required().hex().length(24),
   }),
-  // headers: Joi.object().keys({
-  //   authorization: Joi.string().required().pattern(RegExToken),
-  // }).unknown(true),
 });
 
 module.exports.validateCardDislike = () => celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().required().hex().length(24),
   }),
-  // headers: Joi.object().keys({
-  //   authorization: Joi.string().required().pattern(RegExToken),
-  // }).unknown(true),
 });
