@@ -17,6 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(cookies());
+
 app.use('/', Router);
 app.all('*', handleRouteError);
 app.use(requestRateLimiter);
