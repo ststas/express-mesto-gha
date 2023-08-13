@@ -7,9 +7,7 @@ const usersRouter = require('./users');
 const cardsRouter = require('./cards');
 
 router.post('/signin', validateSignIn(), login);
-router.post('/signup',
-validateSignUp(),
-createUser);
+router.post('/signup', validateSignUp(), createUser);
 router.use('/users', auth, usersRouter);
 router.use('/cards', auth, cardsRouter);
 

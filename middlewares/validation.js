@@ -48,34 +48,34 @@ module.exports.validateCardCreation = () => celebrate({
     name: Joi.string().min(2).max(30),
     link: Joi.string().pattern(RegExUrl),
   }),
-  headers: Joi.object().keys({
-    authorization: Joi.string().required().pattern(RegExToken),
-  }).unknown(true),
+  // headers: Joi.object().keys({
+  //   authorization: Joi.string().required().pattern(RegExToken),
+  // }).unknown(true),
 })
 
 module.exports.validateCardRemoval = () => celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().required().hex().length(24),
   }),
-  headers: Joi.object().keys({
-    authorization: Joi.string().required().pattern(RegExToken),
-  }).unknown(true),
+  // headers: Joi.object().keys({
+  //   authorization: Joi.string().required().pattern(RegExToken),
+  // }).unknown(true),
 })
 
 module.exports.validateCardLike = () => celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().required().hex().length(24),
   }),
-  headers: Joi.object().keys({
-    authorization: Joi.string().required().pattern(RegExToken),
-  }).unknown(true),
+  // headers: Joi.object().keys({
+  //   authorization: Joi.string().required().pattern(RegExToken),
+  // }).unknown(true),
 })
 
 module.exports.validateCardDislike = () => celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().required().hex().length(24),
   }),
-  headers: Joi.object().keys({
-    authorization: Joi.string().required().pattern(RegExToken),
-  }).unknown(true),
+  // headers: Joi.object().keys({
+  //   authorization: Joi.string().required().pattern(RegExToken),
+  // }).unknown(true),
 })
