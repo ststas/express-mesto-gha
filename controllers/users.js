@@ -57,13 +57,11 @@ module.exports.getUsers = (req, res) => User.find()
 
 module.exports.getUserById = (req, res) => {
   const { userId } = req.params;
-  if (userId.length === 24) {
-    return User.findById(userId)
-      .orFail()
-      .then((user) => res.status(200).send(user))
-      .catch((err) => handleError(res, err));
-  } return handleWrongCredentials(res, `Invalid User ID: ${userId}. User ID must contain 24 symbols`);
-};
+  return User.findById(userId)
+    .orFail()
+    .then((user) => res.status(200).send(user))
+    .catch((err) => handleError(res, err));
+}
 
 module.exports.getUserInfo = (req, res) => {
   const userId = req.user._id;

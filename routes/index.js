@@ -14,7 +14,4 @@ router.use('/users', auth, usersRouter);
 router.use('/cards', auth, cardsRouter);
 router.all('*', handleRouteError)
 
-
-
-
 module.exports = router;
