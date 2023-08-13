@@ -8,7 +8,7 @@
     },
     "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_id"]}],
-    "no-useless-escape": []
+    "no-useless-escape": 0,
     },
     "settings": {
       "import/resolver": {
