@@ -44,13 +44,13 @@ module.exports.login = (req, res) => {
           const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'my-very-secret-key', {
             expiresIn: '7d',
           });
-          // res.cookie('token', token, {
-            // httpOnly: true,
-          //   sameSite: true,
-          //   maxAge: 7 * 24 * 60 * 60 * 1000
-          // });
-          // // return res.status(200).json({ _id: user._id });
-          return res.status(200).send({ token });
+          res.cookie('jwt', token, {
+            httpOnly: true,
+            sameSite: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+          });
+          return res.status(200).json({ _id: user._id });
+          // return res.status(200).send({ token });
         });
     })
     .catch((err) => handleError(res, err));
