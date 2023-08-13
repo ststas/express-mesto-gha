@@ -6,7 +6,6 @@ const { errors } = require('celebrate');
 require('dotenv').config();
 const Router = require('./routes');
 const { requestRateLimiter } = require('./utils/requestRateLimiter');
-const { handleRouteError } = require('./errors');
 
 const { PORT = 3000, URI = 'mongodb://localhost:27017/mestodb' } = process.env;
 
@@ -19,6 +18,5 @@ app.use(helmet());
 app.use(cookies());
 app.use(requestRateLimiter);
 app.use('/', Router);
-app.all('*', handleRouteError);
 app.use(errors());
 app.listen(PORT);
