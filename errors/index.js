@@ -2,7 +2,6 @@ const http2 = require('http2');
 const { default: mongoose } = require('mongoose');
 
 const { constants } = http2;
-// console.log(constants);
 
 function handleError(res, err) {
   if (err instanceof mongoose.Error.ValidationError || err instanceof mongoose.Error.CastError) {
