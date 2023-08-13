@@ -10,10 +10,11 @@ const cardsRouter = require('./cards');
 
 router.post('/signin', validateSignIn(), login);
 router.post('/signup', validateSignUp(), createUser);
+router.use('/users', auth, usersRouter);
+router.use('/cards', auth, cardsRouter);
 router.all('*', handleRouteError)
-// router.use(auth);
-router.use('/users', usersRouter);
-router.use('/cards', cardsRouter);
+
+
 
 
 module.exports = router;
