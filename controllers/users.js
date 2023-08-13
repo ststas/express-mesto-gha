@@ -19,7 +19,7 @@ module.exports.createUser = (req, res) => {
       email, password: hash, name, about, avatar,
     })
       .then((user) => res.status(201).send({
-        email: user.email, name: user.name, about: user.about, avatar: user.avatar, _id: user._id
+        email: user.email, name: user.name, about: user.about, avatar: user.avatar, _id: user._id,
       })))
     .catch((err) => {
       if (err.code === 11000) {
@@ -34,7 +34,7 @@ module.exports.login = (req, res) => {
   return User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return handleWrongCredentials(res, 'Wrong email or password');;
+        return handleWrongCredentials(res, 'Wrong email or password');
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
@@ -61,7 +61,7 @@ module.exports.getUserById = (req, res) => {
     .orFail()
     .then((user) => res.status(200).send(user))
     .catch((err) => handleError(res, err));
-}
+};
 
 module.exports.getUserInfo = (req, res) => {
   const userId = req.user._id;

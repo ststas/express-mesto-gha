@@ -3,9 +3,8 @@ const {
   validateCardCreation,
   validateCardRemoval,
   validateCardLike,
-  validateCardDislike
-} = require('../middlewares/validation')
-
+  validateCardDislike,
+} = require('../middlewares/validation');
 
 const {
   getCards, createCard, deleteCard, likeCard, dislikeCard,
