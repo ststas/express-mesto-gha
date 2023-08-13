@@ -18,8 +18,7 @@ function handleWrongCredentials(res, customMessage) {
   return res.status(constants.HTTP_STATUS_UNAUTHORIZED).send({ message: customMessage });
 }
 
-function handleRouteError(res) {
-  console.log('test')
+function handleRouteError(err, res) {
   return res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: 'Page not found' });
 }
 
