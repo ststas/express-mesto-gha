@@ -29,7 +29,7 @@ module.exports.deleteCard = (req, res) => {
         return handleAccessDenied(res);
       }
       return deletedCard.deleteOne()
-        .then(() => res.status(200).send(deletedCard));
+        .then((card) => res.status(200).send(card));
     })
     .catch((err) => handleError(res, err));
 };
