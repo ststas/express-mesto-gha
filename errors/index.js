@@ -10,7 +10,7 @@ function handleError(res, err) {
   if (err instanceof mongoose.Error.DocumentNotFoundError) {
     return res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: err.message });
   }
-  return res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR).send({ message: 'Internal Server Error' });
+  return res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' });
 }
 
 function handleWrongCredentials(res, customMessage) {
@@ -18,7 +18,7 @@ function handleWrongCredentials(res, customMessage) {
 }
 
 function handleRouteError(err, res) {
-  return res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: 'Page not found' });
+  return res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: 'Page Not Found' });
 }
 
 function handleAccessDenied(res) {
