@@ -17,7 +17,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "jsonwebtoken": ">=9.0.0",
+    "jsonwebtoken": "^9.0.1",
     "nodemon": "^3.0.1",
     "prettier": "3.0.0"
   },
@@ -34,8 +34,8 @@
     "helmet": "^7.0.0",
     "http2": "^3.3.7",
     "joi": "^17.9.2",
-    "jsonwebtoken": ">=9.0.0",
     "mongoose": "^7.4.1",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "jsonwebtoken": "^9.0.1"
   }
 }
