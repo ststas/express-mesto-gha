@@ -34,7 +34,7 @@
     "http2": "^3.3.7",
     "joi": "^17.9.2",
     "joi-jwt": "^1.0.1",
-    "jsonwebtoken": "^9.0.1",
+    "jsonwebtoken": ">=9.0.0",
     "mongoose": "^7.4.1",
     "validator": "^13.11.0"
   }
