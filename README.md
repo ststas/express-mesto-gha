@@ -20,7 +20,7 @@
 
 ## To run
 * use `NPM RUN START` to start a server.
-* use `NPM RUN START` to start a server with hot-reload.
+* use `NPM RUN DEV` to start a server with hot-reload.
 
 ## Link
 https://github.com/ststas/express-mesto-gha
@@ -51,7 +51,7 @@ https://github.com/ststas/express-mesto-gha
 
 ## Для запуска
 * используйте `NPM RUN START` для запуска сервера.
-* используйте `NPM RUN START` для запуска сервера с hot-reload.
+* используйте `NPM RUN DEV` для запуска сервера с hot-reload.
 
 ## Link
 * https://github.com/ststas/express-mesto-gha
@@ -62,11 +62,3 @@ https://github.com/ststas/express-mesto-gha
 
 [![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)
 
-# ССЫЛКА
-https://github.com/ststas/express-mesto-gha
-
-## Директории
-
-`/routes` — папка с файлами роутера  
-`/controllers` — папка с файлами контроллеров пользователя и карточки   
-`/models` — папка с файлами описания схем пользователя и карточки  
