@@ -3,14 +3,13 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const {
-  handleError,
   handleWrongCredentials,
   handleEmailIsRegisteredError,
 } = require('../errors');
 
 const { NODE_ENV = 'preprod', JWT_SECRET } = process.env;
 
-module.exports.createUser = (req, res) => {
+module.exports.createUser = (req, res, next) => {
   const {
     email, password, name, about, avatar,
   } = req.body;
@@ -24,11 +23,11 @@ module.exports.createUser = (req, res) => {
     .catch((err) => {
       if (err.code === 11000) {
         return handleEmailIsRegisteredError(res);
-      } return handleError(res, err);
+      } return next(err);
     });
 };
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findOne({ email }).select('+password')
@@ -52,45 +51,45 @@ module.exports.login = (req, res) => {
           return res.status(200).json({ _id: user._id });
         });
     })
-    .catch((err) => handleError(res, err));
+    .catch((err) => next(err));
 };
 
-module.exports.getUsers = (req, res) => User.find()
+module.exports.getUsers = (req, res, next) => User.find()
   .then((users) => res.status(200).send(users))
-  .catch((err) => handleError(res, err));
+  .catch((err) => next(err));
 
-module.exports.getUserById = (req, res) => {
+module.exports.getUserById = (req, res, next) => {
   const { userId } = req.params;
   return User.findById(userId)
     .orFail()
     .then((user) => res.status(200).send(user))
-    .catch((err) => handleError(res, err));
+    .catch((err) => next(err));
 };
 
-module.exports.getUserInfo = (req, res) => {
+module.exports.getUserInfo = (req, res, next) => {
   const userId = req.user._id;
   if (userId.length === 24) {
     return User.findById(userId)
       .orFail()
       .then((user) => res.status(200).send(user))
-      .catch((err) => handleError(res, err));
+      .catch((err) => next(err));
   } return handleWrongCredentials(res, `Invalid User ID: ${userId}. User ID must contain 24 symbols`);
 };
 
-module.exports.updateUserInfo = (req, res) => {
+module.exports.updateUserInfo = (req, res, next) => {
   const { name, about } = req.body;
   const userId = req.user._id;
   return User.findByIdAndUpdate(userId, { name, about }, { new: true, runValidators: true })
     .orFail()
     .then((updatedUser) => res.status(200).send(updatedUser))
-    .catch((err) => handleError(res, err));
+    .catch((err) => next(err));
 };
 
-module.exports.updateUserAvatar = (req, res) => {
+module.exports.updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   const userId = req.user._id;
   return User.findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
     .orFail()
     .then((updatedUser) => res.status(200).send(updatedUser))
-    .catch((err) => handleError(res, err));
+    .catch((err) => next(err));
 };

@@ -1,17 +1,4 @@
-const http2 = require('http2');
-const { default: mongoose } = require('mongoose');
-
-const { constants } = http2;
-
-function handleError(res, err) {
-  if (err instanceof mongoose.Error.ValidationError || err instanceof mongoose.Error.CastError) {
-    return res.status(constants.HTTP_STATUS_BAD_REQUEST).send({ message: err.message });
-  }
-  if (err instanceof mongoose.Error.DocumentNotFoundError) {
-    return res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: err.message });
-  }
-  return res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' });
-}
+const { constants } = require('http2');
 
 function handleWrongCredentials(res, customMessage) {
   return res.status(constants.HTTP_STATUS_UNAUTHORIZED).send({ message: customMessage });
@@ -30,7 +17,6 @@ function handleEmailIsRegisteredError(res) {
 }
 
 module.exports = {
-  handleError,
   handleRouteError,
   handleWrongCredentials,
   handleAccessDenied,
