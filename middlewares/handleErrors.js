@@ -9,7 +9,7 @@ function handleErrors(err, req, res, next) {
   } else {
     res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' });
     next();
-}
+  }
 }
 
 module.exports = { handleErrors };
