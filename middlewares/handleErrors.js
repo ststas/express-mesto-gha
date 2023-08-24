@@ -7,7 +7,8 @@ function handleErrors(err, req, res, next) {
   } else if (err instanceof mongoose.Error.DocumentNotFoundError) {
     res.status(constants.HTTP_STATUS_NOT_FOUND).send({ message: err.message });
   } else {
-    res.status(constants.HTTP_STATUS_INTERNAL_SERVER_ERROR).send({ message: 'На сервере произошла ошибка' });
+    const { statusCode = constants.HTTP_STATUS_BAD_REQUEST, message } = err;
+    res.status(statusCode).json({ message: statusCode === constants.HTTP_STATUS_BAD_REQUEST ? 'На сервере произошла ошибка' : message });
     next();
   }
 }

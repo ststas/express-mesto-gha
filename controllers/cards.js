@@ -1,6 +1,6 @@
 const Card = require('../models/card');
 
-const { handleAccessDenied } = require('../errors');
+const AccessDeniedError = require('../errors/AccessDeniedError');
 
 module.exports.getCards = (req, res, next) => Card.find()
   .populate(['owner', 'likes'])
@@ -25,7 +25,7 @@ module.exports.deleteCard = (req, res, next) => {
     .orFail()
     .then((deletedCard) => {
       if (req.user._id !== String(deletedCard.owner._id)) {
-        return handleAccessDenied(res);
+        return next(new AccessDeniedError('Access Denied'));
       }
       return deletedCard.deleteOne()
         .then((card) => res.status(200).send(card));
