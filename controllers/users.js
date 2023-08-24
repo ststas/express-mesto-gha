@@ -1,11 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-
-const {
-  handleWrongCredentials,
-  handleEmailIsRegisteredError,
-} = require('../errors');
+const WrongCredentialsError = require('../errors/WrongCredentialsError');
+const EmailIsRegisteredError = require('../errors/EmailIsRegisteredError');
 
 const { NODE_ENV = 'preprod', JWT_SECRET } = process.env;
 
@@ -22,7 +19,7 @@ module.exports.createUser = (req, res, next) => {
       })))
     .catch((err) => {
       if (err.code === 11000) {
-        return handleEmailIsRegisteredError(res);
+        return next(new EmailIsRegisteredError('Email is Already Registered'));
       } return next(err);
     });
 };
@@ -33,12 +30,12 @@ module.exports.login = (req, res, next) => {
   return User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return handleWrongCredentials(res, 'Wrong email or password');
+        return next(new WrongCredentialsError('Wrong email or password'));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return handleWrongCredentials(res, 'Wrong email or password');
+            return next(new WrongCredentialsError('Wrong email or password'));
           }
           const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'my-very-secret-key', {
             expiresIn: '7d',
@@ -73,7 +70,7 @@ module.exports.getUserInfo = (req, res, next) => {
       .orFail()
       .then((user) => res.status(200).send(user))
       .catch((err) => next(err));
-  } return handleWrongCredentials(res, `Invalid User ID: ${userId}. User ID must contain 24 symbols`);
+  } return next(new WrongCredentialsError(`Invalid User ID: ${userId}. User ID must contain 24 symbols`));
 };
 
 module.exports.updateUserInfo = (req, res, next) => {
